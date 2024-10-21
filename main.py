@@ -23,6 +23,8 @@
 #Implementar cyk
 # https://www.geeksforgeeks.org/cocke-younger-kasami-cyk-algorithm/
 
+# Importar cyk_parse_tree y build_parse_tree desde CYKParseTree.py
+from CYKParseTree import cyk_parse_tree, build_parse_tree
 
 import CYK as cyk
 
