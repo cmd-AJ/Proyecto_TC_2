@@ -22,3 +22,14 @@
 
 #Implementar cyk
 # https://www.geeksforgeeks.org/cocke-younger-kasami-cyk-algorithm/
+
+
+import CYK as cyk
+
+w = "he drinks a beer with she"
+
+
+table = cyk.cyk_parse(w)
+
+print("\nCYK Parse Table:")
+print(table)
