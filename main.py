@@ -24,11 +24,11 @@
 # https://www.geeksforgeeks.org/cocke-younger-kasami-cyk-algorithm/
 
 # Importar cyk_parse_tree y build_parse_tree desde CYKParseTree.py
-from CYKParseTree import cyk_parse_tree, build_parse_tree
+from CYKParseTree import build_parse_tree
 
 import CYK as cyk
 
-import CFG_to_CNF
+import json
 
 
 # Importar la función convertir_CFG_a_CNF del módulo CFG_to_CNF
@@ -40,11 +40,30 @@ prod_dict_cnf = convertir_CFG_a_CNF()
 # Imprimir la gramática en CNF
 imprimir_cnf(prod_dict_cnf)
 
+print(' ')
 
-w = "he drinks a beer with she"
+
+w = input('Ingresa la cadena que deseas realizar\n Ejemplos: \n he drinks a beer with she \n the cat cooks\n Cadena: ')
 
 
-table = cyk.cyk_parse(w)
+with open('CNF.json', 'r', encoding='utf-8') as f:
+        cfg = json.load(f)
+    
+    # Extraer variables, terminales y producciones
+variables = cfg['variables']
+terminales = cfg['terminales']
+producciones = cfg['producciones']
 
-print("\nCYK Parse Table:")
+
+
+table = cyk.cyk_parse(producciones, w)
+
+print("\nCYK Parse Tabla con el algoritmo CYK:")
 print(table)
+
+
+parse_tree = build_parse_tree(producciones, table, w.split())
+
+# Renderiza el árbol de análisis como un PNG
+parse_tree.render(filename="./CYK_Parse_Tree", format="png", cleanup=False)
+print("Generando el arbol 'CYK_Parse_Tree.png'.")

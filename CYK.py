@@ -5,23 +5,23 @@
 
 import pandas as pd
 
-# Los no terminales y adaptar con el codigo de Z
-non_terminals = ["S0", "VP", "PP", "NP", "V", "P", "N", "Det"]
-terminals = ["cooks", "drinks", "eats", "cuts", "he", "she", "in", "with", "cat", "dog", "beer", "cake", "juice", "meat", "soup", "fork", "knife", "oven", "spoon", "a", "the"]
+# # Los no terminales y adaptar con el codigo de Z
+# non_terminals = ["S0", "VP", "PP", "NP", "V", "P", "N", "Det"]
+# terminals = ["cooks", "drinks", "eats", "cuts", "he", "she", "in", "with", "cat", "dog", "beer", "cake", "juice", "meat", "soup", "fork", "knife", "oven", "spoon", "a", "the"]
 
-# Reglas gramaticas solo que hay que ver si necesitamos adaptar con el codigo de Z
-R = {
-    "S0": ["NP VP"],
-    "VP": ["V NP", "VP PP", "cooks", "drinks", "eats", "cuts"],
-    "PP": ["P NP"],
-    "NP": ["Det N", "he", "she"],
-    "V": ["cooks", "drinks", "eats", "cuts"],
-    "P": ["in", "with"],
-    "N": ["cat", "dog", "beer", "cake", "juice", "meat", "soup", "fork", "knife", "oven", "spoon"],
-    "Det": ["a", "the"],
-}
+# # Reglas gramaticas solo que hay que ver si necesitamos adaptar con el codigo de Z
+# R = {
+#     "S0": ["NP VP"],
+#     "VP": ["V NP", "VP PP", "cooks", "drinks", "eats", "cuts"],
+#     "PP": ["P NP"],
+#     "NP": ["Det N", "he", "she"],
+#     "V": ["cooks", "drinks", "eats", "cuts"],
+#     "P": ["in", "with"],
+#     "N": ["cat", "dog", "beer", "cake", "juice", "meat", "soup", "fork", "knife", "oven", "spoon"],
+#     "Det": ["a", "the"],
+# }
 
-def cyk_parse(w):
+def cyk_parse( R , w):
     words = w.split()
     n = len(words)
 

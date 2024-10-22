@@ -1,0 +1,35 @@
+digraph {
+	S0_0_5 [label=S0]
+	NP_0_0 [label=NP]
+	S0_0_5 -> NP_0_0
+	he_0_0 [label=he]
+	NP_0_0 -> he_0_0
+	VP_1_5 [label=VP]
+	S0_0_5 -> VP_1_5
+	VP_1_3 [label=VP]
+	VP_1_5 -> VP_1_3
+	V_1_1 [label=V]
+	VP_1_3 -> V_1_1
+	drinks_1_1 [label=drinks]
+	V_1_1 -> drinks_1_1
+	NP_2_3 [label=NP]
+	VP_1_3 -> NP_2_3
+	Det_2_2 [label=Det]
+	NP_2_3 -> Det_2_2
+	a_2_2 [label=a]
+	Det_2_2 -> a_2_2
+	N_3_3 [label=N]
+	NP_2_3 -> N_3_3
+	beer_3_3 [label=beer]
+	N_3_3 -> beer_3_3
+	PP_4_5 [label=PP]
+	VP_1_5 -> PP_4_5
+	P_4_4 [label=P]
+	PP_4_5 -> P_4_4
+	with_4_4 [label=with]
+	P_4_4 -> with_4_4
+	NP_5_5 [label=NP]
+	PP_4_5 -> NP_5_5
+	she_5_5 [label=she]
+	NP_5_5 -> she_5_5
+}
