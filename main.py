@@ -28,6 +28,19 @@ from CYKParseTree import cyk_parse_tree, build_parse_tree
 
 import CYK as cyk
 
+import CFG_to_CNF
+
+
+# Importar la función convertir_CFG_a_CNF del módulo CFG_to_CNF
+from CFG_to_CNF import convertir_CFG_a_CNF, imprimir_cnf
+
+# Llamar a la función para convertir la gramática CFG a CNF
+prod_dict_cnf = convertir_CFG_a_CNF()
+
+# Imprimir la gramática en CNF
+imprimir_cnf(prod_dict_cnf)
+
+
 w = "he drinks a beer with she"
 
 

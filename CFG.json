@@ -1,6 +1,6 @@
 { 
 
-"variables" : [ "S", "VP", "PP" , "NP", "V", "P", "N", "Det" ]  ,
+"variables": ["S", "VP", "PP", "NP", "V", "P", "N", "Det"],
 
 "simbolos":["cooks", "drinks" , "eats" , "cuts", "he" , "she", "in", "with", "cat", "dog", "beer", "cake", "juice", "meat", "soup", "fork", "knife", "oven", "spoon", "a" ,"the"  ]  ,
     
