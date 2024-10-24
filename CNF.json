@@ -34,9 +34,6 @@
         "the"
     ],
     "producciones": {
-        "S": [
-            "NP VP"
-        ],
         "VP": [
             "VP PP",
             "V NP",

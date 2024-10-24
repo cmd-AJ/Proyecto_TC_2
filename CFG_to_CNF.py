@@ -109,6 +109,21 @@ def convertir_CFG_a_CNF(ruta_cfg_json='CFG.json'):
         return nuevas_producciones
 
     prod_dict = convertir_a_binario(prod_dict)
+    
+
+    # Gather all values from the dictionary (excluding S0 key values)
+    all_values = set()
+    for key, values in prod_dict.items():
+        if key != 'S0':  # Exclude 'S0'
+            for value_list in values:
+                # Split values if they contain spaces (like 'NP VP')
+                all_values.update(value_list.split())
+
+    # Remove keys that are not found in the values of other keys
+    prod_dict = {key: values for key, values in prod_dict.items() if key == 'S0' or key in all_values}
+
+
+
 
     # Opcional: Guardar la gramática CNF en un archivo JSON
     gramatica_cnf = {

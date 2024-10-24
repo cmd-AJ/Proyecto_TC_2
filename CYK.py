@@ -29,9 +29,12 @@ def cyk_parse( R , w):
     dict_list = {}
     contador = 1
     for e in words:
-        dict_list[e] = ['']*contador + ['-']*(n-contador)
+        dict_list[contador] = ['']*contador + ['-']*(n-contador)
         contador = contador + 1
     table = pd.DataFrame(dict_list, index=words)
+    
+    
+    print(table)
 
     # hace la identidad
     for i, word in enumerate(words):
@@ -63,9 +66,9 @@ def cyk_parse( R , w):
 
     # Revisa si es verdadero o no osea si tiene un estado inicial
     if 'S0' in table.iloc[0, n - 1]:
-        print("The string is in the language (True).")
+        print("\033[0m La cadena es verdadera porque es aceptada por el lenguaje \033[0m")
     else:
-        print("The string is not in the language (False).")
+        print("\033[31m Esta cadena NO es aceptada por este lenguaje \033[0m")
 
     return table
 

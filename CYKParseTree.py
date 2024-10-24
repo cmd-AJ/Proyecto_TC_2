@@ -11,6 +11,12 @@ def build_parse_tree(R, parse_table, words):
 
 
     words_set = set(words)
+    word_counts = dict.fromkeys(words_set, 0)
+    
+    for e in words:
+        word_counts[e] = word_counts[e] + 1
+        
+
 
     def add_nodes(non_terminal, i, j, parent=None):
 
@@ -38,12 +44,15 @@ def build_parse_tree(R, parse_table, words):
                 prod_parts = prod.split()
 
                 # Check for terminal productions
-                if len(prod_parts) == 1 and prod_parts[0] in words_set:
+                if len(prod_parts) == 1 and prod_parts[0] in word_counts:
                     word_node = f"{prod_parts[0]}_{i}_{i}"
                     tree.node(word_node, prod_parts[0])
                     tree.edge(node_name, word_node)
-
-                    words_set.remove(prod_parts[0])
+                    if word_counts[prod_parts[0]] == 0:
+                        words_set.remove(prod_parts[0])
+                    else:
+                        word_counts[prod_parts[0]] = word_counts[prod_parts[0]] - 1
+                    
                     return 
 
                 else:

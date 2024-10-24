@@ -46,6 +46,7 @@ print(' ')
 w = input('Ingresa la cadena que deseas realizar\n Ejemplos: \n he drinks a beer with she \n the cat cooks\n Cadena: ')
 
 
+
 with open('CNF.json', 'r', encoding='utf-8') as f:
         cfg = json.load(f)
     
@@ -55,15 +56,25 @@ terminales = cfg['terminales']
 producciones = cfg['producciones']
 
 
+verif = w.split(' ')
 
-table = cyk.cyk_parse(producciones, w)
+esterminal = True
 
-print("\nCYK Parse Tabla con el algoritmo CYK:")
-print(table)
+for d in verif:
+    if d not in terminales:
+        print('\033[31mError la palabra encontrada no pertenece a los terminales \npalabra: '+ d + '\033[0m')
+        esterminal = False
+        
 
 
-parse_tree = build_parse_tree(producciones, table, w.split())
+if esterminal == True:
+    table = cyk.cyk_parse(producciones, w)
 
-# Renderiza el árbol de análisis como un PNG
-parse_tree.render(filename="./CYK_Parse_Tree", format="png", cleanup=False)
-print("Generando el arbol 'CYK_Parse_Tree.png'.")
+    print("\nCYK Parse Tabla con el algoritmo CYK:")
+    print(table)
+
+    parse_tree = build_parse_tree(producciones, table, w.split())
+
+    # Renderiza el árbol de análisis como un PNG
+    parse_tree.render(filename="./CYK_Parse_Tree", format="png", cleanup=False)
+    print("Generando el arbol 'CYK_Parse_Tree.png'.")
