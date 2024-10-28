@@ -41,10 +41,7 @@ def convertir_CFG_a_CNF(ruta_cfg_json='CFG.json'):
         variables.append(nuevo_simbolo_inicial)
     prod_dict[nuevo_simbolo_inicial] = [simbolo_inicial]
 
-    # Paso 2: Eliminar producciones nulas (ε-producciones)
-    # En este caso, no hay producciones nulas, así que no es necesario
-
-    # Paso 3: Eliminar producciones unitarias
+    # Paso 2: Eliminar producciones unitarias
     def eliminar_producciones_unitarias(prod_dict):
         cambios = True
         while cambios:
@@ -64,7 +61,7 @@ def convertir_CFG_a_CNF(ruta_cfg_json='CFG.json'):
 
     prod_dict = eliminar_producciones_unitarias(prod_dict)
 
-    # Paso 4: Reemplazar terminales en producciones con variables
+    # Paso 3: Reemplazar terminales en producciones con variables
     def reemplazar_terminales(prod_dict):
         nuevas_producciones = copy.deepcopy(prod_dict)
         nuevas_variables = {}
@@ -90,7 +87,7 @@ def convertir_CFG_a_CNF(ruta_cfg_json='CFG.json'):
 
     prod_dict = reemplazar_terminales(prod_dict)
 
-    # Paso 5: Convertir producciones a binarias
+    # Paso 4: Convertir producciones a binarias
     def convertir_a_binario(prod_dict):
         nuevas_producciones = copy.deepcopy(prod_dict)
         indice_var = 1
@@ -109,23 +106,30 @@ def convertir_CFG_a_CNF(ruta_cfg_json='CFG.json'):
         return nuevas_producciones
 
     prod_dict = convertir_a_binario(prod_dict)
-    
 
-    # Gather all values from the dictionary (excluding S0 key values)
-    all_values = set()
-    for key, values in prod_dict.items():
-        if key != 'S0':  # Exclude 'S0'
-            for value_list in values:
-                # Split values if they contain spaces (like 'NP VP')
-                all_values.update(value_list.split())
+    # Paso 5: Eliminar producciones inútiles
+    def eliminar_producciones_inutiles(prod_dict, simbolo_inicial='S0'):
+        # Almacena los símbolos que se pueden alcanzar desde el símbolo inicial
+        alcanzables = set([simbolo_inicial])
+        cambios = True
 
-    # Remove keys that are not found in the values of other keys
-    prod_dict = {key: values for key, values in prod_dict.items() if key == 'S0' or key in all_values}
+        while cambios:
+            cambios = False
+            for var in list(prod_dict.keys()):
+                if var in alcanzables:
+                    for prod in prod_dict[var]:
+                        for simbolo in prod.split():
+                            if simbolo in prod_dict and simbolo not in alcanzables:
+                                alcanzables.add(simbolo)
+                                cambios = True
 
+        # Filtrar las producciones para incluir solo las alcanzables
+        prod_dict = {key: values for key, values in prod_dict.items() if key in alcanzables}
+        return prod_dict
 
+    prod_dict = eliminar_producciones_inutiles(prod_dict)
 
-
-    # Opcional: Guardar la gramática CNF en un archivo JSON
+    # Guardar la gramática CNF en un archivo JSON
     gramatica_cnf = {
         'variables': variables,
         'terminales': terminales,
